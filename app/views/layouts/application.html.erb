@@ -10,6 +10,52 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">tippy.jp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <% if @current_user %>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item<%= ' active' if request.path_info == '/mypage' %>"><%= link_to "My Page", "/mypage", class: "nav-link" %></li>
+                <li class="nav-item<%= ' active' if request.path_info == '/mypage/settings' %>"><%= link_to "Account Settings" , "/mypage/settings", class: "nav-link" %></li>
+                <% if @current_user.admin %>
+                  <li class="nav-item<%= ' active' if request.path_info == '/admin/posts' %>"><%= link_to "Posts", "/admin/posts", class: "nav-link" %></li>
+                  <li class="nav-item<%= ' active' if request.path_info == '/admin/users' %>"><%= link_to "Users", "/admin/users", class: "nav-link" %></li>
+                  <li class="nav-item<%= ' active' if request.path_info == '/signup' %>"><%= link_to "Create User", "/signup", class: "nav-link" %></li>
+                <% end %>
+            </ul>
+            <ul class="navbar-nav">
+              <span class="navbar-text mr-2 text-light">Logged in as <%= @current_user.name %></span>
+              <li class="nav-item"><%= link_to "Logout", "/logout", method: :post, class: "btn btn-outline-danger my-2 my-sm-0" %></li>
+            </ul>
+          <% else %>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item<%= ' active' if request.path_info == '/' %>"><%= link_to "HOME", "/", class: "nav-link" %></li>
+              <li class="nav-item<%= ' active' if request.path_info == '/about' %>"><%= link_to "About", "/about", class: "nav-link" %></li>
+              <li class="nav-item<%= ' active' if request.path_info == '/login' %>"><%= link_to "Log in", "/login", class: "nav-link" %></li>
+            </ul>
+          <% end %>
+        </div>
+      </nav>
+    </header>
+
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %> alert-dismissible fade show text-center" role="alert">
+        <%= message %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+
+    <div class="container mt-4">
+      <%= yield %>
+      <hr>
+      <p class="text-muted">© 2019 tippy</p>
+    </div>
+
   </body>
 </html>
