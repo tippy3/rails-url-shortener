@@ -1,0 +1,13 @@
+<h2>Log in</h2>
+
+<% if @error_message %>
+  <div class="alert alert-danger" role="alert">
+    <%= @error_message %>
+  </div>
+<% end %>
+
+<%= form_tag "/login", {method: :post, class: "form-inline"}  do %>
+  <input name="name" placeholder="username" class="form-control mb-2 mr-sm-2" value="<%= @name %>">
+  <input name="password" type="password" placeholder="password" class="form-control mb-2 mr-sm-2" autocomplete="off" value="<%= @password %>">
+  <input type="submit" class="form-control btn btn-primary mb-2" value="Log in">
+<% end %>

@@ -20,7 +20,7 @@
           <% if @current_user %>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item<%= ' active' if request.path_info == '/mypage' %>"><%= link_to "My Page", "/mypage", class: "nav-link" %></li>
-                <li class="nav-item<%= ' active' if request.path_info == '/mypage/settings' %>"><%= link_to "Account Settings" , "/mypage/settings", class: "nav-link" %></li>
+                <li class="nav-item<%= ' active' if request.path_info == '/settings' %>"><%= link_to "Account Settings" , "/settings", class: "nav-link" %></li>
                 <% if @current_user.admin %>
                   <li class="nav-item<%= ' active' if request.path_info == '/admin/posts' %>"><%= link_to "Posts", "/admin/posts", class: "nav-link" %></li>
                   <li class="nav-item<%= ' active' if request.path_info == '/admin/users' %>"><%= link_to "Users", "/admin/users", class: "nav-link" %></li>
@@ -34,7 +34,6 @@
           <% else %>
             <ul class="navbar-nav mr-auto">
               <li class="nav-item<%= ' active' if request.path_info == '/' %>"><%= link_to "HOME", "/", class: "nav-link" %></li>
-              <li class="nav-item<%= ' active' if request.path_info == '/about' %>"><%= link_to "About", "/about", class: "nav-link" %></li>
               <li class="nav-item<%= ' active' if request.path_info == '/login' %>"><%= link_to "Log in", "/login", class: "nav-link" %></li>
             </ul>
           <% end %>

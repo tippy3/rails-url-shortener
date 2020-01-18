@@ -7,7 +7,6 @@
     <thead>
       <tr>
         <th scope="col">Id</th>
-        <th scope="col">Email</th>
         <th scope="col">Name</th>
         <th scope="col">Admin</th>
         <th scope="col">Created</th>
@@ -18,7 +17,6 @@
       <% @users.each do |user| %>
         <tr>
           <th scope="row"><%= user.id %></th>
-          <td><%= user.email %></td>
           <td><%= user.name %></td>
           <td><%= user.admin if user.admin %></td>
           <td><%= user.created_at %></td>
