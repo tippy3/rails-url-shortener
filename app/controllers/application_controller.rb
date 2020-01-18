@@ -11,4 +11,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authenticate_user
+    if @current_user == nil
+      redirect_to "/login", warning: "Please log in."
+    end
+  end
+
 end

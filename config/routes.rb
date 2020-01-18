@@ -8,8 +8,11 @@ Rails.application.routes.draw do
   post '/logout' => 'users#logout_post'
 
   get '/signup' => 'users#signup'
+  post '/signup' => 'users#signup_post'
 
   get '/mypage' => 'users#mypage'
-  get 'settings' => 'users#edit'
+  get '/settings' => 'users#edit'
+  post '/settings' => 'users#edit_post'
+  post '/settings/destroy' => 'users#destroy'
 
 end
