@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :forbid_login_user, {only: [:login, :login_post, :signup, :signup_post]}
 
   def mypage
-    @users = User.all
+    @url = Url.new
   end
 
   def edit
