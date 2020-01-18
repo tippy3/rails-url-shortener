@@ -22,9 +22,7 @@
                 <li class="nav-item<%= ' active' if request.path_info == '/mypage' %>"><%= link_to "My Page", "/mypage", class: "nav-link" %></li>
                 <li class="nav-item<%= ' active' if request.path_info == '/settings' %>"><%= link_to "Account Settings" , "/settings", class: "nav-link" %></li>
                 <% if @current_user.admin %>
-                  <li class="nav-item<%= ' active' if request.path_info == '/admin/posts' %>"><%= link_to "Posts", "/admin/posts", class: "nav-link" %></li>
-                  <li class="nav-item<%= ' active' if request.path_info == '/admin/users' %>"><%= link_to "Users", "/admin/users", class: "nav-link" %></li>
-                  <li class="nav-item<%= ' active' if request.path_info == '/signup' %>"><%= link_to "Create User", "/signup", class: "nav-link" %></li>
+                  <li class="nav-item<%= ' active' if controller_name=='admin' %>"><%= link_to "Admin", "/admin/users", class: "nav-link" %></li>
                 <% end %>
             </ul>
             <ul class="navbar-nav">
@@ -53,7 +51,7 @@
     <div class="container mt-4">
       <%= yield %>
       <hr>
-      <p class="text-muted">© 2019 tippy</p>
+      <p class="text-muted">© 2020 tippy</p>
     </div>
 
   </body>

@@ -1,4 +1,4 @@
-<h2>Shorten url</h2>
+<h2><i class="fas fa-link"></i> Shorten url</h2>
 
 <% @url.errors.full_messages.each do |message| %>
   <div class="alert alert-danger" role="alert">
@@ -32,7 +32,7 @@
         <tr>
           <td>
             <%= link_to "/#{url.short_url}/edit", class: "text-body" do %>
-              <span class="text-muted">tippy.jp/</span><span class="font-weight-bold"><%= url.short_url %></span> ★
+              <span class="text-muted">tippy.jp/</span><span class="font-weight-bold"><%= url.short_url %></span> <i class="fas fa-edit text-primary"></i>
             <% end %>
           </td>
           <td><%= link_to url.long_url, url.long_url, target: :_blank, rel: "noopener noreferrer" %></td>

@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
 
+
   # home
   get '/' => 'home#index'
   get 'privacy' => 'home#privacy'
+
+  # admin
+  get 'admin/users'
+  post 'admin/users/:id/destroy' => 'admin#user_destroy'
+  get 'admin/users/:id' => 'admin#user_show'
+  get 'admin/urls'
 
   # login, logout, signup
   get 'login' => 'users#login'
