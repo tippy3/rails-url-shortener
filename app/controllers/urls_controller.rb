@@ -25,14 +25,18 @@ class UrlsController < ApplicationController
     end
   end
 
-  # create view is users/mypage
-  def create
+  def new
+    @url = Url.new
+    render "urls/mypage"
+  end
+
+  def new_post
     @url = @current_user.urls.new(long_url: params[:long_url], short_url: params[:short_url], click_count: 0)
     if @url.save
       redirect_to "/#{@url.short_url}/edit", success: "Successfully shortened."
     else
       @user = @current_user
-      render "users/mypage"
+      render "urls/mypage"
     end
   end
 

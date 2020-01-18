@@ -3,10 +3,6 @@ class UsersController < ApplicationController
   before_action :authenticate_user, {except: [:login, :login_post, :signup, :signup_post]}
   before_action :forbid_login_user, {only: [:login, :login_post, :signup, :signup_post]}
 
-  def mypage
-    @url = Url.new
-  end
-
   def edit
   end
 

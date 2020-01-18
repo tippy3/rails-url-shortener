@@ -12,17 +12,16 @@ Rails.application.routes.draw do
   post 'signup' => 'users#signup_post'
 
   # user
-  get 'mypage' => 'users#mypage'
-  post 'mypage' => 'urls#create'
   get 'settings' => 'users#edit'
   post 'settings' => 'users#edit_post'
   post 'settings/destroy' => 'users#destroy'
 
   # url
+  get 'mypage' => 'urls#new'
+  post 'mypage' => 'urls#new_post'
   get ':short_url/edit' => 'urls#edit'
   post ':short_url/edit' => 'urls#edit_post'
   post ':short_url/destroy' => "urls#destroy"
   get ':short_url' => 'urls#show'
-  # create action is 'mypage'
 
 end
