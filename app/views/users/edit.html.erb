@@ -22,5 +22,9 @@
 
 <hr>
 <h3>Delete Account</h3>
-<p>Your url will be deleted.</p>
-<p><%= link_to "Delete your account", "/settings/destroy", method: :post, class: 'btn btn-outline-danger', data: {confirm: "Are you sure?"} %></p>
+<% if @current_user.admin %>
+  <p class="text-muted">Admin account cannot be deleted.</p>
+<% else %>
+  <p class="text-muted">Your url will be deleted.</p>
+  <p><%= link_to "Delete your account", "/settings/destroy", method: :post, class: 'btn btn-outline-danger', data: {confirm: "Are you sure?"} %></p>
+<% end %>

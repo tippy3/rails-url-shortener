@@ -17,27 +17,42 @@
     </tr>
   </tbody>
 </table>
+
+<% if !@user.admin %>
 <p><%= link_to "Delete this account", "/admin/users/#{@user.id}/destroy", method: :post, class: 'btn btn-outline-danger', data: {confirm: "Are you sure?"} %></p>
+<% end %>
 
 <div class="table-responsive mt-5">
   <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">Shortened url</th>
-        <th scope="col">Original url</th>
-        <th scope="col">Clicks</th>
+        <th scope="col">Shortened URL</th>
+        <th scope="col">Original URL</th>
+        <th scope="col">Click</th>
+        <th scope="col">Created</th>
+        <th scope="col">Updated</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
       <% @user.urls.each do |url| %>
         <tr>
+          <th scope="row"><%= url.short_url %></th>
+          <td><%= url.long_url.truncate(50) %></td>
+          <td><%= url.click_count %></td>
+          <td><%= url.created_at.strftime("%Y.%m.%d %H:%M") %></td>
+          <td><%= url.updated_at.strftime("%Y.%m.%d %H:%M") if url.created_at != url.updated_at %></td>
           <td>
-            <%= link_to "/#{url.short_url}/edit", class: "text-body" do %>
-              <span class="text-muted">tippy.jp/</span><span class="font-weight-bold"><%= url.short_url %></span> ★
+            <%= link_to "/#{url.short_url}/edit" do %>
+              <i class="fas fa-edit"></i>
             <% end %>
           </td>
-          <td><%= link_to url.long_url, url.long_url, target: :_blank, rel: "noopener noreferrer" %></td>
-          <td><%= url.click_count %></td>
+          <td>
+            <%= link_to "/#{url.short_url}/destroy", method: :post, data: {confirm: 'Are you sure?'} do %>
+              <i class="fas fa-trash"></i>
+            <% end %>
+          </td>
         </tr>
       <% end %>
       <% if @user.urls.empty? %>

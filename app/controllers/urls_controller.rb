@@ -14,9 +14,11 @@ class UrlsController < ApplicationController
   end
 
   def edit
+    # @urlはbefore_actionで取得済み
   end
 
   def edit_post
+    # @urlはbefore_actionで取得済み
     @url.long_url = params[:long_url]
     if @url.save
       redirect_to "/#{@url.short_url}/edit", success: "Successfully saved."
@@ -31,16 +33,16 @@ class UrlsController < ApplicationController
   end
 
   def new_post
-    @url = @current_user.urls.new(long_url: params[:long_url], short_url: params[:short_url], click_count: 0)
+    @url = Url.new(user_id: @current_user.id ,long_url: params[:long_url], short_url: params[:short_url], click_count: 0)
     if @url.save
       redirect_to "/#{@url.short_url}/edit", success: "Successfully shortened."
     else
-      @user = @current_user
       render "urls/mypage"
     end
   end
 
   def destroy
+    # @urlはbefore_actionで取得済み
     @url.destroy
     redirect_to "/mypage", success: "Successfully deleted."
   end
