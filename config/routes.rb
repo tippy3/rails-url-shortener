@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
 
-
   # home
   get '/' => 'home#index'
-  get 'privacy' => 'home#privacy'
 
   # admin
   get 'admin/users'
@@ -26,6 +24,7 @@ Rails.application.routes.draw do
   # url
   get 'mypage' => 'urls#new'
   post 'mypage' => 'urls#new_post'
+  get ':short_url/qr' => 'urls#qr'
   get ':short_url/edit' => 'urls#edit'
   post ':short_url/edit' => 'urls#edit_post'
   post ':short_url/destroy' => "urls#destroy"

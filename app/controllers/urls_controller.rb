@@ -1,6 +1,6 @@
 class UrlsController < ApplicationController
 
-  before_action :authenticate_user, {except: [:show]}
+  before_action :authenticate_user, {except: [:show, :qr]}
   before_action :get_url_and_ensure_correct_user, {only: [:edit, :edit_post, :destroy]}
 
   def show
@@ -8,6 +8,15 @@ class UrlsController < ApplicationController
     if @url
       @url.increment!(:click_count, 1) # access counter
       redirect_to @url.long_url, status: :moved_permanently # 301 redirect
+    else
+      redirect_to "/404.html"
+    end
+  end
+
+  def qr
+    @url = Url.find_by(short_url: params[:short_url])
+    if @url
+      render "urls/qr"
     else
       redirect_to "/404.html"
     end

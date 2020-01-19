@@ -38,12 +38,20 @@ class UsersController < ApplicationController
   end
 
   def signup_post
-    @user = User.new(name: params[:name],password: params[:password], admin: false)
-    if @user.save
-      session[:user_id] = @user.id
-      redirect_to "/mypage", success: "Welcome! Your account was successfully created."
-    else
+    # 暫定的に追加。ユーザー数制限
+    if User.all.length >=7
+      @user = User.new
+      flash.now[:warning] = 'ユーザー数の上限を超えたためサインアップできません'
       render "users/signup"
+      # 前提追加ここまで
+    else
+      @user = User.new(name: params[:name],password: params[:password], admin: false)
+      if @user.save
+        session[:user_id] = @user.id
+        redirect_to "/mypage", success: "Welcome! Your account was successfully created."
+      else
+        render "users/signup"
+      end
     end
   end
 
