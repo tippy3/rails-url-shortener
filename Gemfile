@@ -19,6 +19,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'bcrypt', '~> 3.1.7'
 # tippy add i18n
 gem 'rails-i18n'
+# tippy add rqrcode
+gem 'rqrcode'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
