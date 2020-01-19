@@ -30,7 +30,7 @@ nginxとmysqlは設定済みとします
 ```bash
 $ git clone this_repo
 
-$ cd rails_url_shortener
+$ cd url_shortener
 
 $ bundle install --path vendor/bundle --without development test
 
@@ -41,19 +41,13 @@ $ vi config/master.key
 $ bundle exec rails db:migrate
 
 $ bundle exec rails db:seed
-
-$ bundle exec rails c
-
-# adminユーザーの追加
-irb(main):001:0> User.create(name: "", password: "", admin: true)
-
-irb(main):001:0> quit
+# seedデータで作成されるユーザーのパスワードを必ず変更すること
 
 $ bundle exec rails webpacker:install
 
 $ bundle exec rails webpacker:compile
 
-# メモリが足りないときは以下コマンドでMYSQLを停止するとよい
+# コンパイル時にメモリが足りないときは以下コマンドでMYSQLを停止するとよい
 $ sudo service mysqld stop
 
 ```
