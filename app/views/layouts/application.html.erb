@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <meta name="author" content="tippy">
     <title>tippy.jp</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -12,7 +15,7 @@
   <body>
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">tippy.jp</a>
+        <a class="navbar-brand" href="<%= @current_user? '/mypage' : '/' %>">tippy.jp</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -33,6 +36,7 @@
             <ul class="navbar-nav mr-auto">
               <li class="nav-item<%= ' active' if request.path_info == '/' %>"><%= link_to "HOME", "/", class: "nav-link" %></li>
               <li class="nav-item<%= ' active' if request.path_info == '/login' %>"><%= link_to "Log in", "/login", class: "nav-link" %></li>
+              <li class="nav-item<%= ' active' if request.path_info == '/signup' %>"><%= link_to "Sign up", "/signup", class: "nav-link" %></li>
             </ul>
           <% end %>
         </div>

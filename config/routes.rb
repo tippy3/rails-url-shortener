@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
 
-
   # home
   get '/' => 'home#index'
-  get 'privacy' => 'home#privacy'
 
   # admin
   get 'admin/users'
