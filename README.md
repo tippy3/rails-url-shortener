@@ -1,31 +1,138 @@
-# README
+# 短縮URL作成サービスtippy.jp
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## About
 
-* Ruby version
+【公開中】[http://tippy.jp](http://tippy.jp)
 
-* System dependencies
+**Ruby on Rails 6.0で開発した自分用のURL短縮サービスです。**
 
-* Configuration
+  - ユーザーのサインアップ、ログイン、ログアウト
+  - Adminユーザーの設定
+  - 短縮URLへの任意の文字列の使用
+  - 短縮URLの編集・削除
+  - クリック数の記録
+  - QRコードの表示
 
-* Database creation
 
-* Database initialization
+## TODO
 
-* How to run the test suite
+* 本番環境のディスクがログファイルで汚染されていく問題
+* 定期的にサーバー再起動したい
+* https対応
+* reCAPTCHA v3導入
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## Install (in Production)
 
-* ...
+nginxとmysqlは設定済みとします
+
+```bash
+$ git clone this_repo
+
+$ cd rails_url_shortener
+
+$ bundle install --path vendor/bundle --without development test
+
+$ touch config/master.key
+
+$ vi config/master.key
+
+$ bundle exec rails db:migrate
+
+$ bundle exec rails db:seed
+
+$ bundle exec rails c
+
+# adminユーザーの追加
+irb(main):001:0> User.create(name: "", password: "", admin: true)
+
+irb(main):001:0> quit
+
+$ bundle exec rails webpacker:install
+
+$ bundle exec rails webpacker:compile
+
+# メモリが足りないときは以下コマンドでMYSQLを停止するとよい
+$ sudo service mysqld stop
+
+```
+
+
+## Lanch (in Production)
+```bash
+$ bundle exec rails s -e production
+# -dは不要。あると動かない。
+
+$ sudo systemctl start nginx
+
+```
+
+
+## Stop (in Production)
+```bash
+$ ps aux | grep puma
+
+$ kill -15 {processID}
+
+# sudo systemctl stop nginx
+
+```
+
+
+## Install (in Development)
+
+多分色々間違っています
+
+```bash
+$ git clone this_repo
+
+$ cd url_shortener
+
+$ bundle install --path vendor/bundle
+
+$ bundle exec rails webpacker:install
+
+$ bundle exec rails db:migrate
+
+$ bundle exec rails db:seed
+
+# ほか何かあるかも。yarnが入っていないときとか。
+
+```
+
+
+## Lanch (in Development)
+
+```bash
+$ bundle exec rails s
+
+# 別タブで
+
+$ ./bin/webpack-dev-server
+
+```
+
+
+## Access to database
+
+```bash
+$ bundle exec rails dbconsole
+
+sqlite> .tables
+
+sqlite> .schema users
+
+sqlite> select * from users;
+
+sqlite> .quit
+
+```
+
 
 ## 作業ログ
 
-実行されたコマンド
+rails new前後の手順のメモ
 
 ```
 mkdir url-shortener
@@ -59,3 +166,4 @@ bundle exec rails db:create
 bundle exec rails s
 # localhost:3000で起動できていることを確認
 ```
+
