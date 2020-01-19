@@ -1,0 +1,49 @@
+<h2><i class="fas fa-link"></i> Shorten url</h2>
+
+<% @url.errors.full_messages.each do |message| %>
+  <div class="alert alert-danger" role="alert">
+    <%= message %>
+  </div>
+<% end %>
+
+<%= form_tag("/mypage",{method: :post, class: "form-inline"}) do %>
+  <input type="text" name="long_url" placeholder="Original URL" class="form-control mb-2 mr-sm-2" value="<%= @url.long_url %>" autofocus>
+  <i class="fas fa-arrow-right fa-lg mb-2 mr-sm-2 d-none d-md-inline"></i>
+  <div class="input-group mb-2 mr-sm-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">tippy.jp/</div>
+    </div>
+    <input type="text" name="short_url" placeholder='[a-zA-Z0-9]+' class="form-control" value="<%= @url.short_url %>">
+  </div>
+  <input type="submit" class="btn btn-primary mb-2" value="Shorten url">
+<% end %>
+
+<div class="table-responsive mt-5">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Shortened URL</th>
+        <th scope="col">Original URL</th>
+        <th scope="col">Created</th>
+        <th scope="col">Click</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @current_user.urls.each do |url| %>
+        <tr>
+          <th scope="row">
+            <%= link_to "/#{url.short_url}/edit", class: "text-body" do %>
+              <span class="text-muted">tippy.jp/</span><%= url.short_url %> <i class="fas fa-edit text-primary"></i>
+            <% end %>
+          </th>
+          <td><%= link_to url.long_url.truncate(70), url.long_url, target: :_blank, rel: "noopener noreferrer", data: { turbolinks: false } %></td>
+          <td><%= url.created_at.strftime("%Y.%m.%d %H:%M") %></td>
+          <td><%= url.click_count %></td>
+        </tr>
+      <% end %>
+      <% if @current_user.urls.empty? %>
+        <td>No Data</td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

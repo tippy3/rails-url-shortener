@@ -1,0 +1,53 @@
+<ul class="nav nav-tabs mb-3">
+  <li class="nav-item">
+    <a class="nav-link" href="/admin/users"><i class="fas fa-users"></i> All Users</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="/admin/urls"><i class="fas fa-link"></i> All Urls</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/admin/urls">Invitation Code</a>
+  </li>
+</ul>
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Shortened URL</th>
+        <th scope="col">Owner</th>
+        <th scope="col">Original URL</th>
+        <th scope="col">Click</th>
+        <th scope="col">Created</th>
+        <th scope="col">Updated</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @urls.each do |url| %>
+        <tr>
+          <th scope="row"><%= url.short_url %></th>
+          <td><%= link_to url.user_id, "/admin/users/#{url.user_id}" %></td>
+          <td><%= url.long_url.truncate(50) %></td>
+          <td><%= url.click_count %></td>
+          <td><%= url.created_at.strftime("%Y.%m.%d %H:%M") %></td>
+          <td><%= url.updated_at.strftime("%Y.%m.%d %H:%M") if url.created_at != url.updated_at %></td>
+          <td>
+            <%= link_to "/#{url.short_url}/edit" do %>
+              <i class="fas fa-edit"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "/#{url.short_url}/destroy", method: :post, data: {confirm: 'Are you sure?'} do %>
+              <i class="fas fa-trash"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      <% if @urls.empty? %>
+        <td>No Data</td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

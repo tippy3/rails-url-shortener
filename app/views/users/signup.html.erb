@@ -1,0 +1,23 @@
+<h2>Sign up</h2>
+
+<% @user.errors.full_messages.each do |message| %>
+  <div class="alert alert-danger" role="alert">
+    <%= message %>
+  </div>
+<% end %>
+
+<%= form_tag "/signup", {method: :post, class: "form-inline"} do %>
+  <div class="input-group mb-2 mr-sm-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">username</div>
+    </div>
+    <input name="name" type="text" placeholder='[a-zA-Z0-9]{1,16}' class="form-control" value="<%= @user.name %>">
+  </div>
+  <div class="input-group mb-2 mr-sm-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">password</div>
+    </div>
+    <input name="password" type="password" placeholder='[!-~]{6,24}' class="form-control" value="<%= @user.password %>">
+  </div>
+  <input type="submit" class="form-control btn btn-primary mb-2" value="Sign up">
+<% end %>

@@ -1,0 +1,30 @@
+<h2><i class="fas fa-users-cog"></i> <%= @current_user.name %></h2>
+<p class="text-muted">Username cannot be changed.</p>
+<hr>
+<h3>Change Password</h3>
+<!-- error start -->
+<% if @error_message %>
+  <div class="alert alert-danger" role="alert">
+    <%= @error_message %>
+  </div>
+<% end %>
+<% @current_user.errors.full_messages.each do |message| %>
+  <div class="alert alert-danger" role="alert">
+    <%= message %>
+  </div>
+<% end %>
+<!-- error end -->
+<%= form_tag "/settings",{method: :post, class: "form-inline"} do %>
+  <input name="old_password" type="password" placeholder="Old password" class="form-control mb-2 mr-sm-2" value="<%= @old_password %>">
+  <input name="new_password" type="password" placeholder="New password" class="form-control mb-2 mr-sm-2" value="<%= @new_password %>">
+  <input type="submit" class="form-control btn btn-primary mb-2" value="Update password">
+<% end %>
+
+<hr>
+<h3>Delete Account</h3>
+<% if @current_user.admin %>
+  <p class="text-muted">Admin account cannot be deleted.</p>
+<% else %>
+  <p class="text-muted">Your url will be deleted.</p>
+  <p><%= link_to "Delete your account", "/settings/destroy", method: :post, class: 'btn btn-outline-danger', data: {confirm: "Are you sure?"} %></p>
+<% end %>
