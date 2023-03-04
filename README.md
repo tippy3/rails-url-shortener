@@ -1,9 +1,7 @@
-# 短縮URL作成サービスtippy.jp
+# 短縮URL作成サービス
 
 
 ## About
-
-【公開中】[http://tippy.jp](http://tippy.jp)
 
 **Ruby on Rails 6.0で開発した自分用のURL短縮サービスです。**
 
@@ -75,8 +73,6 @@ $ kill -15 {processID}
 
 
 ## Install (in Development)
-
-多分色々間違っています
 
 ```bash
 $ git clone this_repo
